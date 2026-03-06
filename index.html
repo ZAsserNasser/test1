@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday Shashty 💕</title>
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --rose: #e8627a;
+    --blush: #f5c2cc;
+    --gold: #d4a853;
+    --cream: #fdf6f0;
+    --deep: #3a1a2e;
+    --soft: #f9e4ea;
+  }
+
+  body {
+    background: var(--deep);
+    min-height: 100vh;
+    font-family: 'Cormorant Garamond', serif;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* ── Stars ── */
+  .stars {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+  }
+  .star {
+    position: absolute;
+    border-radius: 50%;
+    background: white;
+    animation: twinkle var(--d) ease-in-out infinite alternate;
+    opacity: 0;
+  }
+  @keyframes twinkle {
+    0%   { opacity: 0; transform: scale(0.6); }
+    100% { opacity: var(--o); transform: scale(1.2); }
+  }
+
+  /* ── Floating Hearts ── */
+  .hearts-bg {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+  }
+  .fheart {
+    position: absolute;
+    bottom: -60px;
+    font-size: var(--fs);
+    animation: floatUp var(--dur) ease-in infinite;
+    animation-delay: var(--delay);
+    opacity: 0;
+  }
+  @keyframes floatUp {
+    0%   { transform: translateY(0) rotate(0deg); opacity: 0; }
+    10%  { opacity: 0.7; }
+    90%  { opacity: 0.4; }
+    100% { transform: translateY(-110vh) rotate(25deg); opacity: 0; }
+  }
+
+  /* ── Petals ── */
+  .petal {
+    position: fixed;
+    pointer-events: none;
+    z-index: 0;
+    font-size: var(--fs);
+    top: -40px;
+    animation: petalFall var(--dur) linear infinite;
+    animation-delay: var(--delay);
+    opacity: 0.7;
+  }
+  @keyframes petalFall {
+    0%   { transform: translateY(-40px) rotate(0deg) translateX(0); opacity: 0; }
+    10%  { opacity: 0.8; }
+    90%  { opacity: 0.5; }
+    100% { transform: translateY(110vh) rotate(360deg) translateX(40px); opacity: 0; }
+  }
+
+  /* ── Main Card ── */
+  .card {
+    position: relative;
+    z-index: 10;
+    background: linear-gradient(160deg, rgba(253,246,240,0.07) 0%, rgba(232,98,122,0.08) 100%);
+    border: 1px solid rgba(212,168,83,0.25);
+    border-radius: 32px;
+    padding: 60px 50px 50px;
+    max-width: 640px;
+    width: 92%;
+    text-align: center;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 0 80px rgba(232,98,122,0.15), 0 0 0 1px rgba(255,255,255,0.04);
+    animation: cardIn 1.2s cubic-bezier(0.22,1,0.36,1) both;
+  }
+  @keyframes cardIn {
+    from { opacity: 0; transform: translateY(40px) scale(0.96); }
+    to   { opacity: 1; transform: translateY(0) scale(1); }
+  }
+
+  .gold-line {
+    width: 80px; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    margin: 0 auto 28px;
+    animation: fadeIn 2s 0.5s both;
+  }
+
+  .subtitle {
+    font-size: 1rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--gold);
+    opacity: 0.85;
+    animation: fadeIn 1.5s 0.3s both;
+  }
+
+  .name {
+    font-family: 'Great Vibes', cursive;
+    font-size: clamp(3.2rem, 10vw, 5.5rem);
+    color: var(--blush);
+    line-height: 1.1;
+    margin: 6px 0 16px;
+    text-shadow: 0 0 40px rgba(245,194,204,0.4);
+    animation: nameIn 1.6s 0.6s cubic-bezier(0.22,1,0.36,1) both;
+  }
+  @keyframes nameIn {
+    from { opacity: 0; transform: scale(0.85) translateY(10px); letter-spacing: 0.1em; }
+    to   { opacity: 1; transform: scale(1) translateY(0); }
+  }
+
+  /* ── Animated Cake ── */
+  .cake-wrap {
+    margin: 28px auto 24px;
+    animation: fadeIn 1.5s 1s both;
+  }
+  .cake-svg { overflow: visible; }
+
+  /* Plate */
+  .plate { fill: #c47f95; }
+  /* Cake layers */
+  .layer-bot { fill: #e8a0b0; }
+  .layer-mid { fill: #f5bec9; }
+  .layer-top { fill: #fcd5de; }
+  /* Frosting drips */
+  .drip { fill: white; opacity: 0.75; }
+  /* Candles */
+  .candle { rx: 4; }
+  .candle-1 { fill: #e8627a; }
+  .candle-2 { fill: var(--gold); }
+  .candle-3 { fill: #c77dff; }
+  /* Flames */
+  .flame {
+    transform-origin: center bottom;
+    animation: flicker 0.9s ease-in-out infinite alternate;
+  }
+  .flame:nth-child(2) { animation-delay: 0.3s; }
+  .flame:nth-child(3) { animation-delay: 0.6s; }
+  @keyframes flicker {
+    0%   { transform: scaleY(1) scaleX(1) rotate(-3deg); opacity: 1; }
+    50%  { transform: scaleY(1.15) scaleX(0.88) rotate(2deg); opacity: 0.85; }
+    100% { transform: scaleY(0.9) scaleX(1.05) rotate(-1deg); opacity: 1; }
+  }
+  /* Sparkles around cake */
+  .sparkle {
+    animation: sparkSpin var(--sd) linear infinite;
+    transform-origin: center;
+  }
+  @keyframes sparkSpin {
+    from { transform: rotate(0deg) scale(1); opacity: 0.9; }
+    50%  { transform: rotate(180deg) scale(1.3); opacity: 0.5; }
+    to   { transform: rotate(360deg) scale(1); opacity: 0.9; }
+  }
+  /* Cake bounce */
+  .cake-group {
+    animation: cakeBounce 3s ease-in-out infinite;
+    transform-origin: center bottom;
+  }
+  @keyframes cakeBounce {
+    0%, 100% { transform: translateY(0); }
+    50%       { transform: translateY(-6px); }
+  }
+
+  /* ── Message ── */
+  .message {
+    font-size: clamp(1.05rem, 3vw, 1.25rem);
+    font-style: italic;
+    color: var(--blush);
+    line-height: 1.85;
+    max-width: 480px;
+    margin: 0 auto 28px;
+    opacity: 0.92;
+    animation: fadeIn 2s 1.4s both;
+  }
+
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    justify-content: center;
+    margin: 22px 0;
+    animation: fadeIn 2s 1.6s both;
+  }
+  .divider span { color: var(--rose); font-size: 1.1rem; }
+  .divider-line {
+    flex: 1; max-width: 80px; height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(212,168,83,0.4), transparent);
+  }
+
+  .wish {
+    font-family: 'Great Vibes', cursive;
+    font-size: clamp(1.8rem, 6vw, 2.8rem);
+    color: var(--gold);
+    text-shadow: 0 0 30px rgba(212,168,83,0.4);
+    animation: fadeIn 2s 1.8s both;
+    line-height: 1.3;
+  }
+
+  .hearts-row {
+    font-size: 1.4rem;
+    margin-top: 20px;
+    animation: fadeIn 2s 2s both;
+    letter-spacing: 6px;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── Confetti burst ── */
+  .confetti-piece {
+    position: fixed;
+    width: 8px; height: 8px;
+    border-radius: 2px;
+    pointer-events: none;
+    z-index: 20;
+    animation: confettiFall var(--cd) ease-in var(--cdelay) both;
+  }
+  @keyframes confettiFall {
+    0%   { transform: translate(var(--cx), -20px) rotate(0deg); opacity: 1; }
+    100% { transform: translate(calc(var(--cx) + var(--csx)), 110vh) rotate(720deg); opacity: 0; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Stars -->
+<div class="stars" id="stars"></div>
+<!-- Floating hearts -->
+<div class="hearts-bg" id="hearts"></div>
+<!-- Rose petals -->
+<div id="petals"></div>
+
+<!-- Main Card -->
+<div class="card">
+  <p class="subtitle">A Celebration of You</p>
+  <div class="gold-line"></div>
+  <h1 class="name">Shashty</h1>
+
+  <!-- Animated Cake SVG -->
+  <div class="cake-wrap">
+    <svg class="cake-svg" width="220" height="230" viewBox="0 0 220 230">
+      <g class="cake-group">
+        <!-- Plate shadow -->
+        <ellipse cx="110" cy="208" rx="74" ry="8" fill="rgba(0,0,0,0.25)"/>
+        <!-- Plate -->
+        <ellipse class="plate" cx="110" cy="202" rx="68" ry="7"/>
+
+        <!-- Bottom layer -->
+        <rect class="layer-bot" x="42" y="158" width="136" height="46" rx="8"/>
+        <ellipse class="layer-bot" cx="110" cy="158" rx="68" ry="9"/>
+        <!-- Bottom drip -->
+        <path class="drip" d="M52,160 Q57,178 54,182 Q51,178 52,160Z"/>
+        <path class="drip" d="M88,159 Q93,176 90,180 Q87,176 88,159Z"/>
+        <path class="drip" d="M132,159 Q137,177 134,181 Q131,177 132,159Z"/>
+        <path class="drip" d="M162,160 Q167,179 164,183 Q161,179 162,160Z"/>
+
+        <!-- Middle layer -->
+        <rect class="layer-mid" x="56" y="122" width="108" height="40" rx="7"/>
+        <ellipse class="layer-mid" cx="110" cy="122" rx="54" ry="9"/>
+        <!-- Middle drip -->
+        <path class="drip" d="M66,124 Q71,138 68,142 Q65,138 66,124Z"/>
+        <path class="drip" d="M106,123 Q111,138 108,142 Q105,138 106,123Z"/>
+        <path class="drip" d="M146,124 Q151,139 148,143 Q145,139 146,124Z"/>
+
+        <!-- Top layer -->
+        <rect class="layer-top" x="72" y="92" width="76" height="34" rx="6"/>
+        <ellipse class="layer-top" cx="110" cy="92" rx="38" ry="7"/>
+        <!-- Top drip -->
+        <path class="drip" d="M82,94 Q86,106 84,110 Q81,106 82,94Z"/>
+        <path class="drip" d="M110,93 Q114,106 112,110 Q109,106 110,93Z"/>
+        <path class="drip" d="M133,94 Q137,107 135,111 Q132,107 133,94Z"/>
+
+        <!-- Decorative dots on cake -->
+        <circle cx="78" cy="142" r="3" fill="white" opacity="0.6"/>
+        <circle cx="110" cy="145" r="3" fill="white" opacity="0.6"/>
+        <circle cx="142" cy="142" r="3" fill="white" opacity="0.6"/>
+        <circle cx="88" cy="134" r="2" fill="#f5c2cc" opacity="0.8"/>
+        <circle cx="132" cy="134" r="2" fill="#f5c2cc" opacity="0.8"/>
+
+        <!-- ══ NUMBER "21" CANDLE ══ -->
+        <!-- Candle body: tall golden candle in the center -->
+        <defs>
+          <linearGradient id="candleGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" style="stop-color:#c8973a"/>
+            <stop offset="40%" style="stop-color:#f0c060"/>
+            <stop offset="100%" style="stop-color:#b8832a"/>
+          </linearGradient>
+          <linearGradient id="candleGrad2" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" style="stop-color:#c05070"/>
+            <stop offset="40%" style="stop-color:#f07090"/>
+            <stop offset="100%" style="stop-color:#a03050"/>
+          </linearGradient>
+          <filter id="glow">
+            <feGaussianBlur stdDeviation="3" result="blur"/>
+            <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+        </defs>
+
+        <!-- Candle stick -->
+        <rect x="88" y="30" width="44" height="40" rx="6" fill="url(#candleGrad)"/>
+        <!-- Candle highlight -->
+        <rect x="92" y="33" width="8" height="32" rx="4" fill="white" opacity="0.25"/>
+        <!-- Candle top cap -->
+        <ellipse cx="110" cy="30" rx="22" ry="5" fill="#f5d070"/>
+
+        <!-- "21" text on candle body -->
+        <text x="110" y="58"
+              font-family="'Great Vibes', cursive"
+              font-size="26"
+              font-weight="bold"
+              text-anchor="middle"
+              fill="#3a1a2e"
+              opacity="0.85">21</text>
+
+        <!-- Wick -->
+        <line x1="110" y1="30" x2="110" y2="22" stroke="#3a1a2e" stroke-width="2" stroke-linecap="round"/>
+
+        <!-- Flame (big, animated) -->
+        <g filter="url(#glow)">
+          <!-- outer flame glow -->
+          <ellipse class="flame" cx="110" cy="14" rx="9" ry="13" fill="#ffee77" opacity="0.5"/>
+          <!-- main flame -->
+          <ellipse class="flame" cx="110" cy="15" rx="7" ry="10" fill="#ffdd57" opacity="0.95"/>
+          <!-- inner flame -->
+          <ellipse class="flame" cx="110" cy="17" rx="4" ry="7" fill="#ff9f43"/>
+          <!-- core -->
+          <ellipse class="flame" cx="110" cy="19" rx="2" ry="4" fill="#fff" opacity="0.8"/>
+        </g>
+
+        <!-- Small side candles (decorative, shorter) -->
+        <!-- Left small candle -->
+        <rect x="64" y="50" width="9" height="22" rx="4" fill="url(#candleGrad2)"/>
+        <rect x="67" y="52" width="3" height="16" rx="2" fill="white" opacity="0.25"/>
+        <ellipse cx="68.5" cy="50" rx="4.5" ry="3" fill="#f09090"/>
+        <line x1="68.5" y1="50" x2="68.5" y2="44" stroke="#3a1a2e" stroke-width="1.5" stroke-linecap="round"/>
+        <ellipse class="flame" cx="68.5" cy="40" rx="4" ry="6" fill="#ffdd57" opacity="0.9"/>
+        <ellipse class="flame" cx="68.5" cy="41" rx="2.5" ry="4" fill="#ff9f43"/>
+
+        <!-- Right small candle -->
+        <rect x="147" y="50" width="9" height="22" rx="4" fill="url(#candleGrad2)"/>
+        <rect x="150" y="52" width="3" height="16" rx="2" fill="white" opacity="0.25"/>
+        <ellipse cx="151.5" cy="50" rx="4.5" ry="3" fill="#f09090"/>
+        <line x1="151.5" y1="50" x2="151.5" y2="44" stroke="#3a1a2e" stroke-width="1.5" stroke-linecap="round"/>
+        <ellipse class="flame" cx="151.5" cy="40" rx="4" ry="6" fill="#ffdd57" opacity="0.9"/>
+        <ellipse class="flame" cx="151.5" cy="41" rx="2.5" ry="4" fill="#ff9f43"/>
+
+        <!-- Sparkles around the big flame -->
+        <g class="sparkle" style="--sd:2.1s" transform-origin="78 30">
+          <text x="72" y="34" font-size="13" fill="#d4a853">✦</text>
+        </g>
+        <g class="sparkle" style="--sd:1.7s" transform-origin="142 28">
+          <text x="137" y="32" font-size="10" fill="#f5c2cc">✦</text>
+        </g>
+        <g class="sparkle" style="--sd:2.5s" transform-origin="92 8">
+          <text x="88" y="12" font-size="9" fill="white">✦</text>
+        </g>
+        <g class="sparkle" style="--sd:1.9s" transform-origin="128 6">
+          <text x="124" y="10" font-size="11" fill="#d4a853">✦</text>
+        </g>
+        <g class="sparkle" style="--sd:2.8s" transform-origin="55 42">
+          <text x="51" y="46" font-size="8" fill="#f5c2cc">✦</text>
+        </g>
+        <g class="sparkle" style="--sd:2.2s" transform-origin="164 40">
+          <text x="160" y="44" font-size="9" fill="#d4a853">✦</text>
+        </g>
+      </g>
+    </svg>
+  </div>
+
+  <p class="message">
+    On this beautiful day, the whole universe smiles<br>
+    because <em>you</em> were born into it. You are loved<br>
+    more deeply than words can ever say. 💕
+  </p>
+
+  <div class="divider">
+    <div class="divider-line"></div>
+    <span>🌹</span>
+    <div class="divider-line"></div>
+  </div>
+
+  <p class="wish">
+    Wishing you a lifetime of<br>joy, love & magic ✨
+  </p>
+
+  <div class="hearts-row">💕 🌸 💕 🌸 💕</div>
+</div>
+
+<script>
+// ── Stars ──
+const starsEl = document.getElementById('stars');
+for (let i = 0; i < 120; i++) {
+  const s = document.createElement('div');
+  s.className = 'star';
+  const size = Math.random() * 2.5 + 0.5;
+  s.style.cssText = `
+    width:${size}px; height:${size}px;
+    left:${Math.random()*100}%;
+    top:${Math.random()*100}%;
+    --d:${(Math.random()*3+1.5).toFixed(2)}s;
+    --o:${(Math.random()*0.6+0.2).toFixed(2)};
+    animation-delay:${(Math.random()*4).toFixed(2)}s;
+  `;
+  starsEl.appendChild(s);
+}
+
+// ── Floating Hearts ──
+const heartsEl = document.getElementById('hearts');
+const heartEmojis = ['💕','💗','💓','🌸','💖','🌷'];
+for (let i = 0; i < 18; i++) {
+  const h = document.createElement('div');
+  h.className = 'fheart';
+  h.textContent = heartEmojis[Math.floor(Math.random()*heartEmojis.length)];
+  h.style.cssText = `
+    left:${Math.random()*100}%;
+    --fs:${(Math.random()*20+12).toFixed(0)}px;
+    --dur:${(Math.random()*8+7).toFixed(1)}s;
+    --delay:${(Math.random()*10).toFixed(1)}s;
+  `;
+  heartsEl.appendChild(h);
+}
+
+// ── Petals ──
+const petalsEl = document.getElementById('petals');
+for (let i = 0; i < 14; i++) {
+  const p = document.createElement('div');
+  p.className = 'petal';
+  p.textContent = ['🌸','🌷','🌺'][Math.floor(Math.random()*3)];
+  p.style.cssText = `
+    left:${Math.random()*100}%;
+    --fs:${(Math.random()*14+10).toFixed(0)}px;
+    --dur:${(Math.random()*7+8).toFixed(1)}s;
+    --delay:${(Math.random()*12).toFixed(1)}s;
+  `;
+  petalsEl.appendChild(p);
+}
+
+// ── Confetti burst on load ──
+const colors = ['#e8627a','#d4a853','#f5c2cc','#c77dff','#fff','#ff9f43'];
+setTimeout(() => {
+  for (let i = 0; i < 80; i++) {
+    const c = document.createElement('div');
+    c.className = 'confetti-piece';
+    const x = Math.random()*100;
+    c.style.cssText = `
+      left:${x}vw;
+      background:${colors[Math.floor(Math.random()*colors.length)]};
+      --cx:0px;
+      --csx:${(Math.random()*100-50).toFixed(0)}px;
+      --cd:${(Math.random()*2+2).toFixed(2)}s;
+      --cdelay:${(Math.random()*1.5).toFixed(2)}s;
+      width:${Math.random()*8+4}px;
+      height:${Math.random()*8+4}px;
+      border-radius:${Math.random()>0.5?'50%':'2px'};
+    `;
+    document.body.appendChild(c);
+    setTimeout(() => c.remove(), 5000);
+  }
+}, 800);
+</script>
+</body>
+</html>
